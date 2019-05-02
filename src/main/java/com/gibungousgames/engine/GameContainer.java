@@ -90,8 +90,7 @@ public class GameContainer implements Runnable {
             }
 
         }
-
-        dispose();
+        
     }
 
     public int getWidth() {
