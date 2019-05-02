@@ -33,13 +33,6 @@ public class GameContainer implements Runnable {
         thread.run(); //calls this.run();
     }
 
-    public void stop(){
-
-    }
-
-    public void dispose(){
-
-    }
 
     public void run() {
         boolean render;
