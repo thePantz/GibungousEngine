@@ -1,6 +1,6 @@
 package com.gibungousgames.engine;
 
-import com.gibungousgames.engine.gfx.Image;
+import com.gibungousgames.engine.gfx.GibungousImage;
 
 import java.awt.image.DataBufferInt;
 
@@ -58,7 +58,7 @@ public class Renderer {
      * @param offX the x coordinate to start drawing the image from
      * @param offY the y coordinate to start drawing the image from
      */
-    public void drawImage(Image image, int offX, int offY){
+    public void drawImage(GibungousImage image, int offX, int offY){
         for(int y = 0; y < image.getHeight(); y++){
             for(int x = 0; x < image.getWidth(); x++){
                 setPixel(x + offX, y + offY, image.getPixels()[x + y * image.getWidth()]);

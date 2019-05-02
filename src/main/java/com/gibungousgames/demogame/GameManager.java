@@ -3,16 +3,16 @@ package com.gibungousgames.demogame;
 import com.gibungousgames.engine.AbstractGame;
 import com.gibungousgames.engine.GameContainer;
 import com.gibungousgames.engine.Renderer;
-import com.gibungousgames.engine.gfx.Image;
+import com.gibungousgames.engine.gfx.GibungousImage;
 
 import java.awt.event.KeyEvent;
 
 public class GameManager extends AbstractGame {
 
-    private Image image;
+    private GibungousImage image;
 
     public GameManager(){
-        image = new Image("/test.png");
+        image = new GibungousImage("/test.png");
     }
 
     public void update(GameContainer gameContainer, float dt) {

@@ -4,15 +4,15 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Image {
+public class GibungousImage {
     private int width, height;
     private int[] pixels;
 
-    public Image(String path){
+    public GibungousImage(String path){
         BufferedImage image = null;
 
         try {
-            image = ImageIO.read(Image.class.getResourceAsStream(path));
+            image = ImageIO.read(GibungousImage.class.getResourceAsStream(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
