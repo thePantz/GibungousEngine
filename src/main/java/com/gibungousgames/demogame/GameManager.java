@@ -3,13 +3,16 @@ package com.gibungousgames.demogame;
 import com.gibungousgames.engine.AbstractGame;
 import com.gibungousgames.engine.GameContainer;
 import com.gibungousgames.engine.Renderer;
+import com.gibungousgames.engine.gfx.Image;
 
 import java.awt.event.KeyEvent;
 
 public class GameManager extends AbstractGame {
 
-    public GameManager(){
+    private Image image;
 
+    public GameManager(){
+        image = new Image("/test.png");
     }
 
     public void update(GameContainer gameContainer, float dt) {
@@ -20,7 +23,7 @@ public class GameManager extends AbstractGame {
     }
 
     public void render(GameContainer gameContainer, Renderer renderer) {
-
+        renderer.drawImage(image, gameContainer.getInput().getMouseX(), gameContainer.getInput().getMouseY());
     }
 
     public static void main(String[] args){
