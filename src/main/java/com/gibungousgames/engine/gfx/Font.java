@@ -6,6 +6,9 @@ package com.gibungousgames.engine.gfx;
  * and offsets of each character
  */
 public class Font {
+
+    public static final Font STANDARD = new Font("/fonts/standardFont.png");
+
     private GameImage fontImage;
     private int[] offsets;
     private int[] widths;
@@ -15,8 +18,8 @@ public class Font {
         fontImage = new GameImage(path);
 
         //ToDo: allow fonts to support a different number of characters
-        offsets = new int[58];
-        widths = new int[58];
+        offsets = new int[59];
+        widths = new int[59];
         int unicode = 0;
 
         for(int i = 0; i < fontImage.getWidth(); i++)

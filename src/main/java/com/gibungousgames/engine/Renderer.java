@@ -1,5 +1,6 @@
 package com.gibungousgames.engine;
 
+import com.gibungousgames.engine.gfx.Font;
 import com.gibungousgames.engine.gfx.GameImage;
 import com.gibungousgames.engine.gfx.GameImageTile;
 
@@ -11,6 +12,7 @@ import java.awt.image.DataBufferInt;
 public class Renderer {
     private int pixelWidth, pixelHeight;
     private int[] pixels;
+    private Font font = Font.STANDARD;
 
     public Renderer(GameContainer gameContainer){
         pixelWidth = gameContainer.getWidth();
@@ -45,6 +47,39 @@ public class Renderer {
         }
 
         pixels[x + y * pixelWidth] = value;
+    }
+
+    /**
+     * Draws text at the specified coordinates, in the specified color
+     * @param text the text to be drawn on screen
+     * @param offX x coordinate to start drawing
+     * @param offY y coordinate to start drawing
+     * @param color hex color to render the text in
+     */
+    public void drawText(String text, int offX, int offY, int color)
+    {
+        int offset = 0;
+        GameImage fontImage = font.getFontImage();
+
+        text = text.toUpperCase();
+
+        for(int i = 0; i < text.length(); i++)
+        {
+            int unicode = text.codePointAt(i) - 32; //Make space 0
+
+            for(int y = 0; y < fontImage.getHeight(); y++)
+            {
+                for(int x = 0; x < font.getWidths()[unicode]; x++)
+                {
+                    if(fontImage.getPixels()[(x + font.getOffsets()[unicode]) + y * fontImage.getWidth()] == 0xffffffff)
+                    {
+                        setPixel(x + offX + offset,y + offY, color);
+                    }
+                }
+            }
+
+            offset += font.getWidths()[unicode];
+        }
     }
 
     /**
