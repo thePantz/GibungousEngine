@@ -90,7 +90,7 @@ public class GameContainer implements Runnable {
             }
 
         }
-        
+
     }
 
     public int getWidth() {
