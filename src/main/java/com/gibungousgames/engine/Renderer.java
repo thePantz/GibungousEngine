@@ -12,6 +12,7 @@ import java.awt.image.DataBufferInt;
 public class Renderer {
     private int pixelWidth, pixelHeight;
     private int[] pixels;
+    
     private Font font = Font.STANDARD;
 
     public Renderer(GameContainer gameContainer){

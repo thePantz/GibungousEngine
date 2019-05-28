@@ -3,6 +3,7 @@ package com.gibungousgames.demogame;
 import com.gibungousgames.engine.AbstractGame;
 import com.gibungousgames.engine.GameContainer;
 import com.gibungousgames.engine.Renderer;
+import com.gibungousgames.engine.audio.SoundClip;
 import com.gibungousgames.engine.gfx.GameImage;
 import com.gibungousgames.engine.gfx.GameImageTile;
 
@@ -11,15 +12,18 @@ import java.awt.event.KeyEvent;
 public class GameManager extends AbstractGame {
 
     private GameImageTile image;
+    private SoundClip clip;
     private float temp = 0;
     public GameManager(){
+
         image = new GameImageTile("/TestImageTile.png", 16, 16);
+        clip = new SoundClip("/audio/OlympicRobots.wav");
     }
 
     public void update(GameContainer gameContainer, float dt) {
         if(gameContainer.getInput().isKeyDown(KeyEvent.VK_A))
         {
-            System.out.println("A was pressed");
+            clip.play();
         }
 
         //update the tile to draw
