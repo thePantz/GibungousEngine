@@ -12,7 +12,7 @@ import java.awt.image.DataBufferInt;
 public class Renderer {
     private int pixelWidth, pixelHeight;
     private int[] pixels;
-    
+
     private Font font = Font.STANDARD;
 
     public Renderer(GameContainer gameContainer){
@@ -41,9 +41,8 @@ public class Renderer {
      * @param value the desired color value
      */
     private void setPixel(int x, int y, int value){
-        // do not set pixels that are out of bounds or
-        // are using the reserved alpha color (invisible color)
-        if((x < 0 || x >= pixelWidth || y < 0 || y >= pixelHeight) || value == 0xffff00ff){
+        // do not set pixels that are out of bounds or invisible
+        if((x < 0 || x >= pixelWidth || y < 0 || y >= pixelHeight) || ((value >> 24) & 0xff) == 0){
             return;
         }
 
@@ -145,5 +144,66 @@ public class Renderer {
                 setPixel(x + offX, y + offY, image.getPixels()[(x + tileX * image.getTileWidth()) + (y + tileY * image.getTileHeight()) * image.getWidth()]);
             }
         }
+    }
+
+    /**
+     * Draws a rectangle onscreen
+     * @param offX x coordinate to start drawing at
+     * @param offY y coordinate to start drawing at
+     * @param width width of the rectangle
+     * @param height height of the rectangle
+     * @param color hex color of the rectangle
+     */
+    public void drawRect(int offX, int offY, int width, int height, int color)
+    {
+        for(int y = 0; y <= height; y++)
+        {
+            setPixel(offX, y + offY, color);
+            setPixel(offX + width, y + offY, color);
+        }
+
+        for (int x = 0; x <= width; x++)
+        {
+            setPixel(x + offX, offY, color);
+            setPixel(x + offX, offY + height, color);
+        }
+    }
+
+    /**
+     * Draws a filled rectangle on screen
+     * @param offX x coordinate to start drawing at
+     * @param offY y coordinate to start drawing at
+     * @param width width of the rectangle
+     * @param height height of the rectangle
+     * @param color hex color of the rectangle
+     */
+    public void drawFillRect(int offX, int offY, int width, int height, int color)
+    {
+        // Don't render anything if the image is completely offscreen
+        if(offX < -width) return;
+        if(offY < -height) return;
+        if(offX >= pixelWidth) return;
+        if(offY >= pixelHeight) return;
+
+        int newX = 0;
+        int newY = 0;
+        int newWidth = width;
+        int newHeight = height;
+
+        // Don't attempt to render pixels that are off screen (Clipping)
+        if(offX < 0){ newX -= offX; }
+        if(offY < 0){ newY -= offY; }
+        if(newWidth + offX > pixelWidth){ newWidth -= newWidth + offX - pixelWidth; }
+        if(newHeight + offY > pixelHeight){ newHeight -= newHeight + offY - pixelHeight; }
+
+        for(int y = newY; y <= newHeight; y++)
+        {
+            for (int x = newX; x <= newWidth; x++)
+            {
+                setPixel(x + offX, y + offY, color);
+            }
+        }
+
+
     }
 }

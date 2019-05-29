@@ -37,6 +37,7 @@ public class GameManager extends AbstractGame {
     }
 
     public void render(GameContainer gameContainer, Renderer renderer) {
+        //renderer.drawFillRect(gameContainer.getInput().getMouseX() - 16,gameContainer.getInput().getMouseY() - 16,32,32,0xffffccff);
         renderer.drawImageTile(image, gameContainer.getInput().getMouseX(), gameContainer.getInput().getMouseY(), (int)temp, 0);
     }
 
